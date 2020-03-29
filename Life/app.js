@@ -11,7 +11,7 @@ function createArray() {
 function fillRandom() {
   for (let i = 0; i < HEIGH; i++)
     for (let j = 0; j < WIDTH; j++) {
-      let randomNum = Math.floor(Math.random() * 2);
+      let randomNum = Math.floor(Math.random() < 0.4);
       if (randomNum) arr[i][j] = 1;
       else arr[i][j] = 0;
     }
@@ -32,11 +32,13 @@ function updateGrid(array) {
     for (let m = 1; m < WIDTH - 1; m++) {
       let aliveNeighbours = 0;
       for (let i = -1; i <= 1; i++)
-        for (let j = -1; j <= 1; j++) aliveNeighbours -= array[l][m];
+        for (let j = -1; j <= 1; j++) aliveNeighbours += array[l + i][m + j];
 
-      if (array[l][m] == 1 && aliveNeighbours < 2) newArr[l][m] = 0;
-      else if (array[l][m] == 1 && aliveNeighbours > 3) newArr[l][m] = 0;
-      else if (array[l][m] == 0 && aliveNeighbours == 3) newArr[l][m] = 1;
+      aliveNeighbours -= array[l][m];
+
+      if (array[l][m] === 1 && aliveNeighbours < 2) newArr[l][m] = 0;
+      else if (array[l][m] === 1 && aliveNeighbours > 3) newArr[l][m] = 0;
+      else if (array[l][m] === 0 && aliveNeighbours === 3) newArr[l][m] = 1;
       else newArr[l][m] = array[l][m];
     }
 }
@@ -51,7 +53,6 @@ updateGrid(arr);
 console.log(`_______________________________________________`);
 
 let timerId = setInterval(() => {
-  console.clear();
   drawGrid(newArr);
   updateGrid(newArr);
 }, 100);
