@@ -31,21 +31,10 @@ function updateGrid(array) {
   for (let l = 1; l < HEIGH - 1; l++)
     for (let m = 1; m < WIDTH - 1; m++) {
       let aliveNeighbours = 0;
-      /*for (let i = -1; i <= 1; i++)
+      for (let i = -1; i <= 1; i++)
         for (let j = -1; j <= 1; j++) aliveNeighbours += array[l + i][m + j];
 
-      aliveNeighbours -= array[l][m];*/
-
-      aliveNeighbours += array[l - 1][m - 1];
-      aliveNeighbours += array[l - 1][m];
-      aliveNeighbours += array[l - 1][m + 1];
-
-      aliveNeighbours += array[l][m - 1];
-      aliveNeighbours += array[l][m + 1];
-
-      aliveNeighbours += array[l + 1][m - 1];
-      aliveNeighbours += array[l + 1][m];
-      aliveNeighbours += array[l + 1][m + 1];
+      aliveNeighbours -= array[l][m];
 
       if (array[l][m] == 1 && aliveNeighbours < 2) newArr[l][m] = 0;
       else if (array[l][m] == 1 && aliveNeighbours > 3) newArr[l][m] = 0;
