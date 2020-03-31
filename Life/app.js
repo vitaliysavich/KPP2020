@@ -1,4 +1,4 @@
-const HEIGH = 10;
+const HEIGH = 15;
 const WIDTH = 30;
 
 function createArray() {
@@ -11,7 +11,7 @@ function createArray() {
 function fillRandom() {
   for (let i = 0; i < HEIGH; i++)
     for (let j = 0; j < WIDTH; j++) {
-      let randomNum = Math.floor(Math.random() < 0.4);
+      let randomNum = Math.random() > 0.4;
       if (randomNum) arr[i][j] = 1;
       else arr[i][j] = 0;
     }
@@ -52,7 +52,8 @@ updateGrid(arr);
 
 console.log(`_______________________________________________`);
 
-let timerId = setInterval(() => {
+setInterval(() => {
+  console.clear();
   drawGrid(newArr);
   updateGrid(newArr);
 }, 100);
