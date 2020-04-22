@@ -1,10 +1,9 @@
-const HEIGH = 15;
-const WIDTH = 30;
+const HEIGH = 30;
+const WIDTH = 50;
 
 function createArray() {
   let arr = [];
   for (let i = 0; i < HEIGH; i++) arr[i] = [];
-
   return arr;
 }
 
@@ -42,18 +41,27 @@ function updateGrid(array) {
       else newArr[l][m] = array[l][m];
     }
 }
+function copyAndResetGrid() {
+  for (var i = 0; i < HEIGH; i++) {
+    for (var j = 0; j < WIDTH; j++) {
+      arr[i][j] = newArr[i][j];
+      newArr[i][j] = 0;
+    }
+  }
+}
 
 let arr = createArray();
 let newArr = createArray();
 
 fillRandom();
 drawGrid(arr);
-updateGrid(arr);
 
 console.log(`_______________________________________________`);
 
 setInterval(() => {
   console.clear();
+  updateGrid(arr);
   drawGrid(newArr);
-  updateGrid(newArr);
+  copyAndResetGrid();
+  console.log(`_______________________________________________`);
 }, 100);
